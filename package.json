@@ -1,0 +1,20 @@
+{
+  "name": "shabbat-card",
+  "version": "1.0.0",
+  "description": "Animated Shabbat/Yom Tov status card for Home Assistant",
+  "type": "module",
+  "main": "dist/shabbat-card.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "lint": "eslint src/"
+  },
+  "keywords": ["home-assistant", "lovelace", "shabbat", "jewish-calendar", "hacs"],
+  "license": "MIT",
+  "devDependencies": {
+    "lit": "^3.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "rollup": "^4.0.0"
+  }
+}
