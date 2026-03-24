@@ -135,9 +135,78 @@ export const CANDLE_SIZES = {
   tiny:    { svgW: 22, svgH: 44,  bodyW: 6,  bodyMaxH: 20,  pad: 5,  flameH: 8,  flameW: 3.5, wickH: 3, poolRxBase: 5,  poolGrow: 1.5, bulge: 1, hlW: 1 },
 };
 
+export const HOLIDAY_DAYS = [
+  // Major Yom Tov
+  { month: 'Tishrei', day: 1, name: 'Rosh Hashana I', category: 'major', festival: 'Rosh Hashana', sensorName: 'Rosh Hashana I' },
+  { month: 'Tishrei', day: 2, name: 'Rosh Hashana II', category: 'major', festival: 'Rosh Hashana', sensorName: 'Rosh Hashana II', diasporaOnly: false },
+  { month: 'Tishrei', day: 10, name: 'Yom Kippur', category: 'major', festival: null, sensorName: 'Yom Kippur' },
+  { month: 'Tishrei', day: 15, name: 'Sukkot I', category: 'major', festival: 'Sukkot', sensorName: 'Sukkot' },
+  { month: 'Tishrei', day: 16, name: 'Sukkot II', category: 'major', festival: 'Sukkot', sensorName: 'Sukkot II', diasporaOnly: true },
+  { month: 'Tishrei', day: 22, name: 'Shmini Atzeret', category: 'major', festival: null, sensorName: 'Shmini Atzeret' },
+  { month: 'Tishrei', day: 23, name: 'Simchat Torah', category: 'major', festival: null, sensorName: 'Simchat Torah', diasporaOnly: true },
+  { month: 'Nisan', day: 15, name: 'Pesach I', category: 'major', festival: 'Pesach', sensorName: 'Pesach' },
+  { month: 'Nisan', day: 16, name: 'Pesach II', category: 'major', festival: 'Pesach', sensorName: 'Pesach II', diasporaOnly: true },
+  { month: 'Nisan', day: 21, name: 'Pesach VII', category: 'major', festival: 'Pesach', sensorName: 'Pesach VII' },
+  { month: 'Nisan', day: 22, name: 'Pesach VIII', category: 'major', festival: 'Pesach', sensorName: 'Pesach VIII', diasporaOnly: true },
+  { month: 'Sivan', day: 6, name: 'Shavuot', category: 'major', festival: 'Shavuot', sensorName: 'Shavuot' },
+  { month: 'Sivan', day: 7, name: 'Shavuot II', category: 'major', festival: 'Shavuot', sensorName: 'Shavuot II', diasporaOnly: true },
+  // Minor / Rabbinic
+  { month: 'Kislev', day: 25, name: 'Chanukah I', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Kislev', day: 26, name: 'Chanukah II', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Kislev', day: 27, name: 'Chanukah III', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Kislev', day: 28, name: 'Chanukah IV', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Kislev', day: 29, name: 'Chanukah V', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Kislev', day: 30, name: 'Chanukah VI', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Tevet', day: 1, name: 'Chanukah VII', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Tevet', day: 2, name: 'Chanukah VIII', category: 'minor', festival: 'Chanukah', sensorName: 'Chanukah' },
+  { month: 'Adar', day: 14, name: 'Purim', category: 'minor', festival: null, sensorName: 'Purim' },
+  { month: 'Adar', day: 15, name: 'Shushan Purim', category: 'minor', festival: null, sensorName: 'Shushan Purim' },
+  { month: 'Shvat', day: 15, name: "Tu B'Shvat", category: 'minor', festival: null, sensorName: "Tu B'Shvat" },
+  { month: 'Iyyar', day: 18, name: "Lag B'Omer", category: 'minor', festival: null, sensorName: 'Lag BaOmer' },
+  { month: 'Av', day: 15, name: "Tu B'Av", category: 'minor', festival: null, sensorName: "Tu B'Av" },
+  // Fast days
+  { month: 'Tishrei', day: 3, name: 'Tzom Gedaliah', category: 'fast', festival: null, sensorName: 'Tzom Gedaliah' },
+  { month: 'Tevet', day: 10, name: "Asara B'Tevet", category: 'fast', festival: null, sensorName: "Asara B'Tevet" },
+  { month: 'Adar', day: 13, name: "Ta'anit Esther", category: 'fast', festival: null, sensorName: "Ta'anit Esther" },
+  { month: 'Tammuz', day: 17, name: 'Tzom Tammuz', category: 'fast', festival: null, sensorName: "Shiva Asar B'Tammuz" },
+  { month: 'Av', day: 9, name: "Tish'a B'Av", category: 'fast', festival: null, sensorName: "Tish'a B'Av" },
+];
+
+export const FESTIVAL_PERIODS = [
+  { name: 'Rosh Hashana', startMonth: 'Tishrei', startDay: 1, endMonth: 'Tishrei', endDay: 2 },
+  { name: 'Sukkot', startMonth: 'Tishrei', startDay: 15, endMonth: 'Tishrei', endDay: 23, endDayIsrael: 22 },
+  { name: 'Pesach', startMonth: 'Nisan', startDay: 15, endMonth: 'Nisan', endDay: 22, endDayIsrael: 21 },
+  { name: 'Shavuot', startMonth: 'Sivan', startDay: 6, endMonth: 'Sivan', endDay: 7, endDayIsrael: 6 },
+  { name: 'Chanukah', startMonth: 'Kislev', startDay: 25, endMonth: 'Tevet', endDay: 2 },
+];
+
+export const HOLIDAY_THEMES = {
+  'Rosh Hashana': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #8B6914 50%, #DAA520 100%)', category: 'major', greeting: 'שנה טובה' },
+  'Yom Kippur': { gradient: 'linear-gradient(180deg, #0a0a1a 0%, #1a1a2e 50%, #2d2d4a 100%)', category: 'major', greeting: 'גמר חתימה טובה' },
+  'Sukkot': { gradient: 'linear-gradient(180deg, #1a3a1a 0%, #2d5a27 50%, #4a8c3f 100%)', category: 'major', greeting: 'חג שמח' },
+  'Shmini Atzeret': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #3d2066 50%, #6b3fa0 100%)', category: 'major', greeting: 'חג שמח' },
+  'Simchat Torah': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #3d2066 50%, #6b3fa0 100%)', category: 'major', greeting: 'חג שמח' },
+  'Pesach': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #2d1810 50%, #5c3a1e 100%)', category: 'major', greeting: 'חג שמח' },
+  'Shavuot': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #4a3060 50%, #8b5e83 100%)', category: 'major', greeting: 'חג שמח' },
+  'Chanukah': { gradient: 'linear-gradient(180deg, #0a1628 0%, #1a3a5c 50%, #2b6cb0 100%)', category: 'minor', greeting: 'חג שמח' },
+  'Purim': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #4a1a5c 50%, #7b3fa0 100%)', category: 'minor', greeting: 'חג שמח' },
+  'Shushan Purim': { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #4a1a5c 50%, #7b3fa0 100%)', category: 'minor', greeting: 'חג שמח' },
+  "Tu B'Shvat": { gradient: 'linear-gradient(180deg, #1a2a1a 0%, #3a5a2a 50%, #5a8a4a 100%)', category: 'minor', greeting: 'חג שמח' },
+  'Lag BaOmer': { gradient: 'linear-gradient(180deg, #1a1a1a 0%, #4a2a1a 50%, #8a4a2a 100%)', category: 'minor', greeting: 'חג שמח' },
+  "Tu B'Av": { gradient: 'linear-gradient(180deg, #1a1a4e 0%, #3d2b6b 50%, #7b4fa0 100%)', category: 'minor', greeting: 'חג שמח' },
+  'Tzom Gedaliah': { gradient: 'linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 50%, #4a4a4a 100%)', category: 'fast', greeting: '' },
+  "Asara B'Tevet": { gradient: 'linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 50%, #4a4a4a 100%)', category: 'fast', greeting: '' },
+  "Ta'anit Esther": { gradient: 'linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 50%, #4a4a4a 100%)', category: 'fast', greeting: '' },
+  "Shiva Asar B'Tammuz": { gradient: 'linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 50%, #4a4a4a 100%)', category: 'fast', greeting: '' },
+  "Tish'a B'Av": { gradient: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%)', category: 'fast', greeting: '' },
+};
+
 export const DEFAULT_CONFIG = {
   size: 'large',
   preview: 'off',
+  diaspora: true,
+  major_holiday_lead_days: 14,
+  minor_holiday_lead_days: 5,
 };
 
 export const PREVIEW_DATA = {
