@@ -118,13 +118,38 @@ export function renderCandle(sizeName, progress) {
   `;
 }
 
+function unlitCandleSvg(heroSize) {
+  return html`<svg width="${heroSize}" height="${heroSize}" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="14" width="8" height="24" rx="4" fill="url(#ucWax)" stroke="#D4B968" stroke-width="0.5"/>
+    <rect x="22" y="16" width="2" height="18" rx="1" fill="rgba(255,255,255,0.25)"/>
+    <ellipse cx="24" cy="38" rx="10" ry="3" fill="#E6C35C" opacity="0.6"/>
+    <path d="M24,14 Q24.8,10 24,8" stroke="#3E2723" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <circle cx="24" cy="8" r="1.5" fill="#888" opacity="0.4"/>
+    <defs>
+      <linearGradient id="ucWax" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#F5E6C8"/>
+        <stop offset="50%" stop-color="#FFF8E7"/>
+        <stop offset="100%" stop-color="#ECD9A0"/>
+      </linearGradient>
+    </defs>
+  </svg>`;
+}
+
+function sparklesSvg(heroSize) {
+  return html`<svg width="${heroSize}" height="${heroSize}" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 4 L26 18 L40 20 L26 22 L24 36 L22 22 L8 20 L22 18 Z" fill="#FFD700" opacity="0.9"/>
+    <path d="M36 6 L37 12 L43 13 L37 14 L36 20 L35 14 L29 13 L35 12 Z" fill="#FFF8E1" opacity="0.7"/>
+    <path d="M10 28 L11 33 L16 34 L11 35 L10 40 L9 35 L4 34 L9 33 Z" fill="#FFF8E1" opacity="0.7"/>
+  </svg>`;
+}
+
 export function renderIcon(sizeName, issur, motzei, progress, showIcon) {
   if (showIcon === false) return nothing;
   if (issur) {
     return html`<div class="sc-melt-candle">${renderCandle(sizeName, progress)}</div>`;
   } else if (motzei) {
-    return html`<div class="sc-hero sc-float">\u2728</div>`;
+    return html`<div class="sc-hero sc-float">${sparklesSvg(48)}</div>`;
   } else {
-    return html`<div class="sc-hero">\uD83D\uDD6F\uFE0F</div>`;
+    return html`<div class="sc-hero">${unlitCandleSvg(48)}</div>`;
   }
 }

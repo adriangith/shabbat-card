@@ -129,11 +129,11 @@ class ShabbatCard extends LitElement {
     const times = sz.showTimes ? html`
       <div class="sc-times">
         <div>
-          <div class="sc-time-label">\uD83D\uDD6F\uFE0F Candle Lighting</div>
+          <div class="sc-time-label">Candle Lighting</div>
           <div class="sc-time-val">${state.candleLighting}</div>
         </div>
         <div>
-          <div class="sc-time-label">\u2728 Havdalah</div>
+          <div class="sc-time-label">Havdalah</div>
           <div class="sc-time-val">${state.havdalah}</div>
         </div>
       </div>` : nothing;
