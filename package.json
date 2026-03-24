@@ -7,14 +7,26 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --watch",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
-  "keywords": ["home-assistant", "lovelace", "shabbat", "jewish-calendar", "hacs"],
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "shabbat",
+    "jewish-calendar",
+    "hacs"
+  ],
   "license": "MIT",
   "devDependencies": {
-    "lit": "^3.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-terser": "^0.4.0",
-    "rollup": "^4.0.0"
+    "lit": "^3.0.0",
+    "rollup": "^4.0.0",
+    "vitest": "^4.1.1"
+  },
+  "dependencies": {
+    "@hebcal/core": "^6.0.8"
   }
 }
