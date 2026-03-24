@@ -163,12 +163,12 @@ The "festival overall" candle only appears for multi-day festivals. Single-day h
 - **Current Yom Tov day timer:** Same sensors — `issur_melacha` on → next `havdalah`
 - **Festival overall timer:** Computed from `FESTIVAL_PERIODS` table. Start = sunset on `startDay - 1` (use integration's candle lighting time as sunset reference for the current location). End = nightfall on `endDay` (use integration's havdalah time as nightfall reference). `@hebcal/core` converts Hebrew dates to Gregorian to compute total duration and elapsed time.
 
-**Visual design (inspired by pillar candle photo):**
-- **Perspective:** Front candle is wider and lower, back candles are narrower and taller. Triangular grouping — not a straight line.
-- **3D shading:** Each candle has cylindrical gradient (left shadow, center highlight, right falloff), ribbed vertical texture, elliptical top surface, wax pool at base, and cast shadow.
-- **Depth cueing:** Back candles have reduced brightness and saturation. Front candle is brightest and most detailed (drips, ember glow).
+**Visual design (reusing the existing candle style):**
+- **Same front-facing candle:** Each candle in the cluster uses the same flat SVG candle from `renderCandle()` — linear wax gradient, highlight stripe, wax drips, flame with flicker animation. No perspective or 3D shading.
+- **Differentiation by size:** Candles vary in width and max height. The most immediate timer (Shabbat) is the widest/shortest, the festival overall is the narrowest/tallest. This gives visual hierarchy without needing perspective.
+- **Slight overlap:** Candles overlap horizontally by ~20-30% of their width, arranged in a row. The most immediate timer renders in front (highest z-order).
 - **Height = time remaining:** Each candle's height is proportional to the percentage of its timer remaining. As time passes, candles melt down independently.
-- **Shared environment:** Combined warm glow from all flames, shared surface shadow beneath the group.
+- **Shared glow:** A single combined ambient glow ellipse beneath the group.
 - **Gradient ID namespacing:** Each candle instance uses suffixed gradient IDs (e.g., `scWaxGrad-0`, `scWaxGrad-1`, `scWaxGrad-2`) to avoid SVG ID conflicts when multiple candles render in the same document.
 
 **Labels below candles:**
@@ -282,7 +282,7 @@ Each preview entry must include concrete mock values for all new state fields (`
 ### `src/candle.js`
 - Phase 1: Extend `renderIcon()` to select a generic category icon when in holiday approaching mode
 - Phase 2: Add per-holiday SVG icon renderers in a lookup map
-- Phase 3: Add `renderCandleCluster(timers, sizeName)` — renders 2-3 overlapping candles with perspective. Each candle uses parameterized width/height/brightness and namespaced gradient IDs.
+- Phase 3: Add `renderCandleCluster(timers, sizeName)` — renders 2-3 overlapping candles in a row, reusing the existing `renderCandle()` style. Each candle uses parameterized width/height and namespaced gradient IDs. No perspective — same flat front-facing design, differentiated by size.
 
 ### `src/styles.js`
 - Add styles for holiday info box (`.sc-holiday-box`) — sized per preset using CSS custom properties, similar to existing `.sc-times`
@@ -368,4 +368,4 @@ Each preview entry must include concrete mock values for all new state fields (`
 - **Single-day vs multi-day festivals**: The candle cluster (Phase 3) shows a "festival overall" candle only when the festival spans multiple days per `FESTIVAL_PERIODS`. For single-day holidays (Shavuot in Israel, fast days), only two candles max (holiday + Shabbat if applicable).
 - **Midnight transitions**: The data key includes a minute-truncated timestamp, so the card re-evaluates holiday mode at least every minute. This ensures mode changes at midnight (when a new Hebrew date starts at sunset — tracked by the integration's sensor updates) are detected promptly.
 - **`@hebcal/core` bundle size**: Monitor that the tree-shaken bundle stays under 80KB total. If it exceeds this, consider extracting only the date arithmetic functions needed.
-- **Performance on low-powered devices**: Phase 3 multi-candle cluster uses multiple SVG gradients and filters. For `tiny` and `compact` size presets, consider a simplified 2D rendering without blur filters.
+- **Performance on low-powered devices**: Phase 3 multi-candle cluster renders multiple SVG candles with gradients and flame animations. For `tiny` and `compact` size presets, consider disabling flame blur filters and reducing drip detail.
