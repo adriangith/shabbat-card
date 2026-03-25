@@ -168,4 +168,60 @@ export const styles = css`
     font-weight: 600;
     margin-bottom: 8px;
   }
+
+  .sc-holiday-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(4px);
+  }
+  .sc-holiday-box-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sc-holiday-box-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .sc-holiday-box-name {
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sc-holiday-box-countdown {
+    font-size: 0.75em;
+    opacity: 0.7;
+  }
+
+  .sc-shabbat-merge {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 0.8em;
+  }
+  .sc-shabbat-merge-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    opacity: 0.9;
+  }
+  .sc-shabbat-merge-times {
+    display: flex;
+    gap: 16px;
+    opacity: 0.7;
+  }
 `;
