@@ -1,8 +1,13 @@
 import { html, nothing } from 'lit';
 
-export function computeSky(sunElevation, issur, motzei, progress, preview, preShabbat = false) {
+export function computeSky(sunElevation, issur, motzei, progress, preview, preShabbat = false, holidayGradient) {
   let bg;
   let isNightSky = false;
+
+  // Holiday gradient override
+  if (holidayGradient) {
+    return { background: holidayGradient, isNightSky: true };
+  }
 
   if ((issur || preShabbat) && preview === 'off' && sunElevation !== undefined) {
     const elev = parseFloat(sunElevation);
