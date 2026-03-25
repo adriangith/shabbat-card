@@ -143,8 +143,45 @@ function sparklesSvg(heroSize) {
   </svg>`;
 }
 
-export function renderIcon(sizeName, issur, motzei, progress, showIcon, preShabbat = false) {
+function majorHolidaySvg(heroSize) {
+  return html`<svg width="${heroSize}" height="${heroSize}" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 4 L28 17 L42 17 L31 26 L35 39 L24 31 L13 39 L17 26 L6 17 L20 17 Z"
+      fill="#FFD700" opacity="0.9" stroke="#DAA520" stroke-width="0.5"/>
+    <path d="M24 10 L26.5 18.5 L36 18.5 L28.5 24.5 L31 33 L24 27.5 L17 33 L19.5 24.5 L12 18.5 L21.5 18.5 Z"
+      fill="#FFF8E1" opacity="0.6"/>
+  </svg>`;
+}
+
+function minorHolidaySvg(heroSize) {
+  return html`<svg width="${heroSize}" height="${heroSize}" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="24" cy="24" r="14" fill="none" stroke="#B8860B" stroke-width="1.5" opacity="0.7"/>
+    <path d="M24 10 L26 20 L36 22 L26 24 L24 34 L22 24 L12 22 L22 20 Z"
+      fill="#DAA520" opacity="0.8"/>
+    <circle cx="24" cy="22" r="3" fill="#FFF8E1" opacity="0.5"/>
+  </svg>`;
+}
+
+function fastDaySvg(heroSize) {
+  return html`<svg width="${heroSize}" height="${heroSize}" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="21" y="12" width="6" height="24" rx="3" fill="#888" opacity="0.6"
+      stroke="#666" stroke-width="0.5"/>
+    <rect x="22.5" y="14" width="1.5" height="16" rx="0.75" fill="rgba(255,255,255,0.2)"/>
+    <ellipse cx="24" cy="36" rx="8" ry="2.5" fill="#666" opacity="0.3"/>
+    <path d="M24,12 Q24.5,9 24,7" stroke="#555" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+
+export function renderIcon(sizeName, issur, motzei, progress, showIcon, preShabbat = false, holidayMode, holidayCategory) {
   if (showIcon === false) return nothing;
+
+  // Holiday approaching mode — show category icon
+  if (holidayMode === 'approaching' && holidayCategory) {
+    const iconFn = holidayCategory === 'major' ? majorHolidaySvg
+      : holidayCategory === 'fast' ? fastDaySvg
+      : minorHolidaySvg;
+    return html`<div class="sc-hero sc-float">${iconFn(48)}</div>`;
+  }
+
   if (issur || preShabbat) {
     return html`<div class="sc-melt-candle">${renderCandle(sizeName, progress)}</div>`;
   } else if (motzei) {
