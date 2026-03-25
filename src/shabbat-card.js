@@ -1,6 +1,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { styles } from './styles.js';
-import { SIZE_PRESETS, DEFAULT_CONFIG, ENTITIES } from './constants.js';
+import { SIZE_PRESETS, DEFAULT_CONFIG, ENTITIES, HOLIDAY_THEMES } from './constants.js';
 import { computeState, buildDataKey } from './state.js';
 import { computeSky, renderStars } from './sky.js';
 import { renderIcon } from './candle.js';
@@ -39,13 +39,18 @@ class ShabbatCard extends LitElement {
   }
 
   shouldUpdate() {
+    const c = this._config;
     // Re-parse here (not shared with computeState) because shouldUpdate runs before render
     const candleLightingIso = this._hass?.states?.[ENTITIES.candleLighting]?.state;
     const candleLightingTs = candleLightingIso ? new Date(candleLightingIso).getTime() : NaN;
     const now = Date.now();
     const inPreShabbatWindow = !isNaN(candleLightingTs) && now >= candleLightingTs && now < candleLightingTs + 20 * 60 * 1000; // 20 min (vs 18) buffers the final tick before issur flips
     const timeBucket = inPreShabbatWindow ? Math.floor(now / 60000) : '';
-    const newKey = (this._config?.size || '') + '|' + (this._config?.preview || '') + '|' + buildDataKey(this._hass) + '|' + timeBucket;
+    const newKey = (c?.size || '') + '|' + (c?.preview || '') + '|'
+      + (c?.diaspora ?? '') + '|'
+      + (c?.major_holiday_lead_days ?? '') + '|'
+      + (c?.minor_holiday_lead_days ?? '') + '|'
+      + buildDataKey(this._hass) + '|' + timeBucket;
     if (newKey === this._lastDataKey) return false;
     this._lastDataKey = newKey;
     return true;
@@ -96,7 +101,12 @@ class ShabbatCard extends LitElement {
     const preview = this._config.preview || 'off';
     const sunState = this._hass.states?.[ENTITIES.sun];
     const sunElev = sunState?.attributes?.elevation;
-    const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview, state.preShabbat);
+    // Holiday theme lookup
+    const holidayThemeKey = state.nextHoliday?.festival || state.nextHoliday?.sensorName;
+    const holidayTheme = holidayThemeKey ? HOLIDAY_THEMES[holidayThemeKey] : null;
+    const holidayGradient = (state.holidayMode !== 'off' && holidayTheme) ? holidayTheme.gradient : null;
+
+    const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview, state.preShabbat, holidayGradient);
 
     const textColor = ((state.issur || state.preShabbat) && isNightSky) || state.motzei ? '#F5F0E8' : '#FFFFFF';
     const showStars = sz.showStars && (((state.issur || state.preShabbat) && isNightSky) || state.motzei);
@@ -129,8 +139,22 @@ class ShabbatCard extends LitElement {
       --sc-two-col-gap: ${sz.twoColGap || '14px'};
     `;
 
-    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat);
+    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat, state.holidayMode, state.nextHoliday?.category);
     const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing; // preShabbat intentionally excluded: progress=0 ring would show "0% complete"
+
+    // Holiday mode adjustments to display
+    let titleText = state.statusText;
+    let subtitleText = state.statusSubtitle;
+    let countdownText = state.countdown;
+    let countdownLabelText = state.countdownLabel;
+
+    if (state.holidayMode === 'approaching' && state.nextHoliday) {
+      titleText = holidayTheme?.greeting || 'חג שמח';
+      subtitleText = state.nextHoliday.sensorName;
+      countdownLabelText = `Until ${state.nextHoliday.sensorName}`;
+    } else if (state.holidayMode === 'shabbat_overlap') {
+      titleText = 'שבת שלום · חג שמח';
+    }
 
     const times = sz.showTimes ? html`
       <div class="sc-times">
@@ -146,6 +170,23 @@ class ShabbatCard extends LitElement {
 
     const date = sz.showDate ? html`<div class="sc-date">${state.hebrewDate}${holidayBit}</div>` : nothing;
 
+    const holidayBox = (state.holidayMode === 'shabbat_merge' || state.holidayMode === 'shabbat_overlap') && state.nextHoliday && sz.showTimes
+      ? html`<div class="sc-holiday-box">
+          <div class="sc-holiday-box-text">
+            <div class="sc-holiday-box-name">${state.nextHoliday.sensorName}</div>
+            <div class="sc-holiday-box-countdown">${state.nextHoliday.daysUntil === 0 ? 'Now' : `In ${state.nextHoliday.daysUntil} day${state.nextHoliday.daysUntil === 1 ? '' : 's'}`}</div>
+          </div>
+        </div>` : nothing;
+
+    const shabbatMerge = state.holidayMode === 'approaching' && state.candleLighting && sz.showTimes
+      ? html`<div class="sc-shabbat-merge">
+          <div class="sc-shabbat-merge-title">Shabbat</div>
+          <div class="sc-shabbat-merge-times">
+            <span>Candle Lighting ${state.candleLighting}</span>
+            <span>Havdalah ${state.havdalah}</span>
+          </div>
+        </div>` : nothing;
+
     const useTwoCol = sz.twoCol && (state.issur || state.preShabbat || state.motzei);
 
     return html`
@@ -160,22 +201,26 @@ class ShabbatCard extends LitElement {
               ${ring}
             </div>
             <div class="sc-col-right">
-              <div class="sc-title">${state.statusText}</div>
-              ${sz.showSubtitle !== false ? html`<div class="sc-subtitle">${state.statusSubtitle}</div>` : nothing}
-              <div class="sc-countdown">${state.countdown}</div>
-              ${sz.showCdLabel !== false ? html`<div class="sc-cd-label">${state.countdownLabel} \u00B7 ${state.targetTimeLocal}</div>` : nothing}
+              <div class="sc-title">${titleText}</div>
+              ${sz.showSubtitle !== false ? html`<div class="sc-subtitle">${subtitleText}</div>` : nothing}
+              <div class="sc-countdown">${countdownText}</div>
+              ${sz.showCdLabel !== false ? html`<div class="sc-cd-label">${countdownLabelText} \u00B7 ${state.targetTimeLocal}</div>` : nothing}
               ${times}
+              ${holidayBox}
+              ${shabbatMerge}
               ${date}
             </div>
           </div>` : html`
           <div class="sc-content${sz.horizontal ? ' sc-horizontal' : ''}">
             ${icon}
-            <div class="sc-title">${state.statusText}</div>
-            ${sz.showSubtitle !== false ? html`<div class="sc-subtitle">${state.statusSubtitle}</div>` : nothing}
+            <div class="sc-title">${titleText}</div>
+            ${sz.showSubtitle !== false ? html`<div class="sc-subtitle">${subtitleText}</div>` : nothing}
             ${ring}
-            <div class="sc-countdown">${state.countdown}</div>
-            ${sz.showCdLabel !== false ? html`<div class="sc-cd-label">${state.countdownLabel} \u00B7 ${state.targetTimeLocal}</div>` : nothing}
+            <div class="sc-countdown">${countdownText}</div>
+            ${sz.showCdLabel !== false ? html`<div class="sc-cd-label">${countdownLabelText} \u00B7 ${state.targetTimeLocal}</div>` : nothing}
             ${times}
+            ${holidayBox}
+            ${shabbatMerge}
             ${date}
           </div>`}
         </div>
