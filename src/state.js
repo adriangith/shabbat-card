@@ -1,4 +1,5 @@
 import { ENTITIES, PREVIEW_DATA } from './constants.js';
+import { getNextHoliday, getHolidayMode } from './holidays.js';
 
 function getState(hass, entityId) {
   return hass?.states?.[entityId]?.state || '';
@@ -31,11 +32,17 @@ function formatTargetTime(isoString) {
   return `${day} ${time}`;
 }
 
-export function computeState(hass, config, cache) {
+export function computeState(hass, config, cache, now = new Date()) {
   const preview = config?.preview || 'off';
 
   if (preview !== 'off' && PREVIEW_DATA[preview]) {
-    return { ...PREVIEW_DATA[preview], error: null };
+    const data = PREVIEW_DATA[preview];
+    return {
+      ...data,
+      holidayMode: data.holidayMode || 'off',
+      nextHoliday: data.nextHoliday || null,
+      error: null,
+    };
   }
 
   const issurState = getState(hass, ENTITIES.issurMelacha);
@@ -50,15 +57,19 @@ export function computeState(hass, config, cache) {
   const parsha = getState(hass, ENTITIES.parsha);
   const hebrewDate = getState(hass, ENTITIES.hebrewDate);
 
+  // Holiday mode computation
+  const nextHoliday = getNextHoliday(now, config);
+  const holidayMode = getHolidayMode(nextHoliday, issur, hasHoliday ? holiday : '');
+
   const candleLightingIso = getState(hass, ENTITIES.candleLighting);
   const havdalahIso = getState(hass, ENTITIES.havdalah);
   const candleLightingTs = new Date(candleLightingIso).getTime();
   const havdalahTs = new Date(havdalahIso).getTime();
-  const now = Date.now();
+  const nowMs = now.getTime();
 
-  const preShabbatRaw = !issur && !motzei && !isNaN(candleLightingTs) && now >= candleLightingTs;
+  const preShabbatRaw = !issur && !motzei && !isNaN(candleLightingTs) && nowMs >= candleLightingTs;
   const shabbatStartTs = preShabbatRaw ? candleLightingTs + 18 * 60 * 1000 : null;
-  const preShabbat = preShabbatRaw && shabbatStartTs !== null && (shabbatStartTs - now) > 0;
+  const preShabbat = preShabbatRaw && shabbatStartTs !== null && (shabbatStartTs - nowMs) > 0;
 
   let statusText, statusSubtitle;
   if (issur && hasHoliday) {
@@ -77,7 +88,7 @@ export function computeState(hass, config, cache) {
 
   if (issur) {
     if (!cache.candleLightingTs) {
-      if (candleLightingTs > now) {
+      if (candleLightingTs > nowMs) {
         const estDuration = hasHoliday ? 26 * 3600000 : 25 * 3600000;
         cache.candleLightingTs = havdalahTs - estDuration;
       } else {
@@ -94,23 +105,23 @@ export function computeState(hass, config, cache) {
   if (issur && cache.candleLightingTs && cache.havdalahTs) {
     const span = cache.havdalahTs - cache.candleLightingTs;
     if (span > 0) {
-      progress = Math.max(0, Math.min(100, ((now - cache.candleLightingTs) / span) * 100));
+      progress = Math.max(0, Math.min(100, ((nowMs - cache.candleLightingTs) / span) * 100));
     }
   }
 
   let countdown, countdownLabel, targetTimeLocal;
   if (preShabbat && shabbatStartTs) {
-    const remaining = shabbatStartTs - now;
+    const remaining = shabbatStartTs - nowMs;
     countdown = remaining > 0 ? formatCountdown(remaining) : '';
     countdownLabel = 'Until Shabbat';
     targetTimeLocal = formatTargetTime(new Date(shabbatStartTs).toISOString());
   } else if (issur && cache.havdalahTs) {
-    const remaining = cache.havdalahTs - now;
+    const remaining = cache.havdalahTs - nowMs;
     countdown = remaining > 0 ? formatCountdown(remaining) : '0m';
     countdownLabel = 'Until Havdalah';
     targetTimeLocal = formatTargetTime(havdalahIso);
   } else {
-    const remaining = candleLightingTs - now;
+    const remaining = candleLightingTs - nowMs;
     countdown = remaining > 0 ? formatCountdown(remaining) : '';
     countdownLabel = 'Until Candle Lighting';
     targetTimeLocal = formatTargetTime(candleLightingIso);
@@ -124,14 +135,16 @@ export function computeState(hass, config, cache) {
     progress, statusText, statusSubtitle,
     countdown, countdownLabel, targetTimeLocal,
     candleLighting, havdalah, hebrewDate,
+    nextHoliday, holidayMode,
     error: null,
   };
 }
 
 export function buildDataKey(hass) {
   const entityIds = Object.values(ENTITIES);
+  const minuteKey = Math.floor(Date.now() / 60000);
   return entityIds.map(e => {
     const s = hass?.states?.[e];
     return (s?.state || '') + JSON.stringify(s?.attributes || {});
-  }).join('|');
+  }).join('|') + '|t' + minuteKey;
 }
