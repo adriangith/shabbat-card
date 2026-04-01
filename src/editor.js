@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { VERSION } from './constants.js';
 
 class ShabbatCardEditor extends LitElement {
   static properties = {
@@ -79,7 +80,7 @@ class ShabbatCardEditor extends LitElement {
           <option value="motzei" ?selected=${currentPreview === 'motzei'}>\u2728 Motzei Shabbat</option>
           <option value="yom_tov" ?selected=${currentPreview === 'yom_tov'}>\uD83C\uDF1F Yom Tov (Pesach)</option>
           <option value="holiday_approaching" ?selected=${currentPreview === 'holiday_approaching'}>Holiday Approaching (Pesach)</option>
-          <option value="holiday_shabbat_merge" ?selected=${currentPreview === 'holiday_shabbat_merge'}>Shabbat + Holiday Merge</option>
+          <option value="holiday_shabbat_merge" ?selected=${currentPreview === 'holiday_shabbat_merge'}>Shabbat + Holiday Approaching</option>
           <option value="holiday_active" ?selected=${currentPreview === 'holiday_active'}>Holiday Active (Pesach)</option>
           <option value="holiday_shabbat_overlap" ?selected=${currentPreview === 'holiday_shabbat_overlap'}>Shabbat + Holiday Overlap</option>
           <option value="fast_approaching" ?selected=${currentPreview === 'fast_approaching'}>Fast Day Approaching</option>
@@ -101,6 +102,7 @@ class ShabbatCardEditor extends LitElement {
         <input type="number" min="1" max="14"
           .value=${this._config?.minor_holiday_lead_days ?? 5}
           @change=${this._minorLeadChanged}>
+        <p style="margin-top: 24px; opacity: 0.3; font-size: 11px;">Shabbat Card v${VERSION}</p>
       </div>
     `;
   }

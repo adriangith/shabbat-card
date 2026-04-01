@@ -104,7 +104,8 @@ class ShabbatCard extends LitElement {
     // Holiday theme lookup
     const holidayThemeKey = state.nextHoliday?.festival || state.nextHoliday?.sensorName;
     const holidayTheme = holidayThemeKey ? HOLIDAY_THEMES[holidayThemeKey] : null;
-    const holidayGradient = (state.holidayMode !== 'off' && holidayTheme) ? holidayTheme.gradient : null;
+    // Only apply holiday gradient when the holiday is actually active (not just approaching)
+    const holidayGradient = (state.holidayMode === 'active' || state.holidayMode === 'shabbat_overlap') && holidayTheme ? holidayTheme.gradient : null;
 
     const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview, state.preShabbat, holidayGradient);
 
@@ -139,7 +140,9 @@ class ShabbatCard extends LitElement {
       --sc-two-col-gap: ${sz.twoColGap || '14px'};
     `;
 
-    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat, state.holidayMode, state.nextHoliday?.category);
+    // Only show holiday icon when holiday is active, not just approaching
+    const effectiveHolidayMode = (state.holidayMode === 'active' || state.holidayMode === 'shabbat_overlap') ? state.holidayMode : 'off';
+    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat, effectiveHolidayMode, state.nextHoliday?.category);
     const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing; // preShabbat intentionally excluded: progress=0 ring would show "0% complete"
 
     // Holiday mode adjustments to display
@@ -148,11 +151,7 @@ class ShabbatCard extends LitElement {
     let countdownText = state.countdown;
     let countdownLabelText = state.countdownLabel;
 
-    if (state.holidayMode === 'approaching' && state.nextHoliday) {
-      titleText = holidayTheme?.greeting || 'חג שמח';
-      subtitleText = state.nextHoliday.sensorName;
-      countdownLabelText = `Until ${state.nextHoliday.sensorName}`;
-    } else if (state.holidayMode === 'shabbat_overlap') {
+    if (state.holidayMode === 'shabbat_overlap') {
       titleText = 'שבת שלום · חג שמח';
     }
 
@@ -170,22 +169,15 @@ class ShabbatCard extends LitElement {
 
     const date = sz.showDate ? html`<div class="sc-date">${state.hebrewDate}${holidayBit}</div>` : nothing;
 
-    const holidayBox = (state.holidayMode === 'shabbat_merge' || state.holidayMode === 'shabbat_overlap') && state.nextHoliday && sz.showTimes
+    const holidayBox = (state.holidayMode === 'approaching' || state.holidayMode === 'shabbat_merge' || state.holidayMode === 'shabbat_overlap') && state.nextHoliday && sz.showTimes
       ? html`<div class="sc-holiday-box">
           <div class="sc-holiday-box-text">
-            <div class="sc-holiday-box-name">${state.nextHoliday.sensorName}</div>
+            <div class="sc-holiday-box-name">${holidayTheme?.greeting ? `${holidayTheme.greeting} · ` : ''}${state.nextHoliday.sensorName}</div>
             <div class="sc-holiday-box-countdown">${state.nextHoliday.daysUntil === 0 ? 'Now' : `In ${state.nextHoliday.daysUntil} day${state.nextHoliday.daysUntil === 1 ? '' : 's'}`}</div>
           </div>
         </div>` : nothing;
 
-    const shabbatMerge = state.holidayMode === 'approaching' && state.candleLighting && sz.showTimes
-      ? html`<div class="sc-shabbat-merge">
-          <div class="sc-shabbat-merge-title">Shabbat</div>
-          <div class="sc-shabbat-merge-times">
-            <span>Candle Lighting ${state.candleLighting}</span>
-            <span>Havdalah ${state.havdalah}</span>
-          </div>
-        </div>` : nothing;
+    const shabbatMerge = nothing;
 
     const useTwoCol = sz.twoCol && (state.issur || state.preShabbat || state.motzei);
 

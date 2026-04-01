@@ -1,0 +1,26 @@
+<h2>How should the card know what's coming next?</h2>
+<p class="subtitle">The Jewish Calendar integration only reports today's holiday. It has no "upcoming holiday" sensor. We need another source.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Built-in Hebrew calendar lookup</h3>
+      <p>Embed a holiday table in the card code — map Hebrew dates to holidays. We already have the Hebrew date sensor (currently "6 Nisan 5786"). The card computes days until the next holiday from the Hebrew date. <strong>No extra dependencies</strong>, works offline, but we maintain the table ourselves.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Detect from candle lighting divergence</h3>
+      <p>The integration has both <code>upcoming_candle_lighting</code> and <code>upcoming_shabbat_candle_lighting</code>. When these differ, a Yom Tov is coming before Shabbat. <strong>Clever but limited</strong> — only works for Yom Tov with issur melacha, not minor holidays or fasts. And doesn't tell us <em>which</em> holiday.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Use the HA calendar entity</h3>
+      <p>If the Jewish Calendar integration exposes a calendar entity, we could query upcoming events from it. <strong>Clean API approach</strong>, but requires checking if this entity exists and what data it provides.</p>
+    </div>
+  </div>
+</div>

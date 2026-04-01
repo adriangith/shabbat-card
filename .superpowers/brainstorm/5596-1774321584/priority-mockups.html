@@ -1,0 +1,166 @@
+<h2>Friday morning — Shabbat tonight, Pesach on Sunday</h2>
+<p class="subtitle">What should the card look like right now? Click the one that feels right.</p>
+
+<div class="cards">
+
+  <!-- Option A: Shabbat wins -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #1a237e 0%, #4a6fa5 40%, #87CEEB 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 300px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+      ">
+        <!-- Regular Shabbat candle -->
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom: 8px;">
+          <rect x="20" y="14" width="8" height="24" rx="4" fill="#F5E6C8" stroke="#D4B968" stroke-width="0.5"/>
+          <rect x="22" y="16" width="2" height="18" rx="1" fill="rgba(255,255,255,0.25)"/>
+          <ellipse cx="24" cy="38" rx="10" ry="3" fill="#E6C35C" opacity="0.6"/>
+          <path d="M24,14 Q24.8,10 24,8" stroke="#3E2723" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div style="font-size: 22px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">שבת שלום</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">Tzav</div>
+        <div style="font-size: 28px; font-weight: 200; letter-spacing: 3px; margin-top: 12px;">8h 15m</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Candle Lighting</div>
+
+        <!-- Holiday demoted to badge -->
+        <div style="
+          margin-top: 16px;
+          padding: 6px 14px;
+          background: rgba(139,105,20,0.25);
+          border: 1px solid rgba(218,165,32,0.4);
+          border-radius: 20px;
+          font-size: 12px;
+          opacity: 0.9;
+        ">
+          Pesach in 2 days
+        </div>
+
+        <div style="display: flex; gap: 32px; margin-top: 14px; font-size: 13px;">
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Candle Lighting</div><div style="font-weight: 500;">6:03 PM</div></div>
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Havdalah</div><div style="font-weight: 500;">6:59 PM</div></div>
+        </div>
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">12 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Shabbat always wins when imminent</h3>
+      <p>Full Shabbat mode with candle, parsha, and countdown. Pesach drops to a small badge. Familiar weekly look — holiday is just a footnote until Shabbat is over.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Holiday stays, Shabbat merges -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #1a1a4e 0%, #2d1810 50%, #5c3a1e 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 300px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+      ">
+        <!-- Pesach icon (seder plate SVG) -->
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom: 8px;">
+          <circle cx="24" cy="24" r="18" fill="#8B6914" opacity="0.3"/>
+          <circle cx="24" cy="24" r="12" fill="#DAA520" opacity="0.4"/>
+          <circle cx="24" cy="20" r="4" fill="#FFF8E1"/>
+          <circle cx="18" cy="26" r="3" fill="#FFF8E1"/>
+          <circle cx="30" cy="26" r="3" fill="#FFF8E1"/>
+          <circle cx="21" cy="32" r="2.5" fill="#FFF8E1"/>
+          <circle cx="27" cy="32" r="2.5" fill="#FFF8E1"/>
+        </svg>
+        <div style="font-size: 22px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">Pesach</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">15 Nisan 5786</div>
+        <div style="font-size: 28px; font-weight: 200; letter-spacing: 3px; margin-top: 12px;">2d 8h</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Erev Pesach</div>
+
+        <!-- Shabbat times merged in -->
+        <div style="
+          margin-top: 16px;
+          padding: 8px 16px;
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.2);
+          border-radius: 12px;
+          font-size: 12px;
+        ">
+          <div style="font-size: 10px; opacity: 0.6; margin-bottom: 4px;">Shabbat tonight</div>
+          <div style="display: flex; gap: 20px; justify-content: center;">
+            <span>Candle Lighting 6:03 PM</span>
+            <span>Havdalah 6:59 PM</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">12 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Holiday stays, Shabbat merges in</h3>
+      <p>Pesach visual identity stays. Shabbat times appear in a merged info box. Keeps the anticipation of the holiday front and center — Shabbat is just practical info layered on top.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Closest event wins -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #1a237e 0%, #4a6fa5 40%, #87CEEB 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 300px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+      ">
+        <!-- Shabbat candle (closest event) -->
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom: 8px;">
+          <rect x="20" y="14" width="8" height="24" rx="4" fill="#F5E6C8" stroke="#D4B968" stroke-width="0.5"/>
+          <rect x="22" y="16" width="2" height="18" rx="1" fill="rgba(255,255,255,0.25)"/>
+          <ellipse cx="24" cy="38" rx="10" ry="3" fill="#E6C35C" opacity="0.6"/>
+          <path d="M24,14 Q24.8,10 24,8" stroke="#3E2723" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div style="font-size: 22px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">שבת שלום</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">Tzav</div>
+        <div style="font-size: 28px; font-weight: 200; letter-spacing: 3px; margin-top: 12px;">8h 15m</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Candle Lighting</div>
+
+        <div style="display: flex; gap: 32px; margin-top: 14px; font-size: 13px;">
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Candle Lighting</div><div style="font-weight: 500;">6:03 PM</div></div>
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Havdalah</div><div style="font-weight: 500;">6:59 PM</div></div>
+        </div>
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">12 Nisan 5786</div>
+      </div>
+
+      <!-- Small label showing what's next after -->
+      <div style="
+        background: rgba(0,0,0,0.15);
+        padding: 6px 12px;
+        text-align: center;
+        font-size: 11px;
+        color: white;
+        opacity: 0.7;
+        border-radius: 0 0 12px 12px;
+      ">
+        After Havdalah → switches to Pesach countdown
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Closest event always wins</h3>
+      <p>Pure proximity: Shabbat is closer, so it's full Shabbat mode — identical to how it looks every week. No holiday info shown at all. After Havdalah on Saturday night, it flips to Pesach mode. Simplest logic, but you lose the holiday context on Friday.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top: 1.5rem; opacity: 0.6;">Scenario: Friday 9:45 AM · Shabbat candle lighting at 6:03 PM tonight · Pesach starts Sunday evening</p>

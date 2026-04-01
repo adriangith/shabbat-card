@@ -1,1 +1,4 @@
 node_modules/
+.superpowers/**/.server.log
+.superpowers/**/.server.pid
+.superpowers/**/.server-stopped

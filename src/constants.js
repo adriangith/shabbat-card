@@ -1,3 +1,5 @@
+export const VERSION = '1.1.0-dev.3';
+
 export const ENTITIES = {
   issurMelacha: 'binary_sensor.jewish_calendar_issur_melacha_in_effect',
   motzei: 'binary_sensor.jewish_calendar_motzei_shabbat_hag',
@@ -353,8 +355,8 @@ export const PREVIEW_DATA = {
     motzei: false,
     holiday: 'Pesach',
     progress: 40,
-    statusText: '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD \u00B7 \u05D7\u05D2 \u05E9\u05DE\u05D7',
-    statusSubtitle: 'Pesach',
+    statusText: '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD',
+    statusSubtitle: 'Shabbat Chol HaMoed Pesach',
     countdown: '14h 45m',
     countdownLabel: 'Until Havdalah',
     targetTimeLocal: 'Saturday 8:10 PM',

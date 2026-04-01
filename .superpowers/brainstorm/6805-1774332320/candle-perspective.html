@@ -1,0 +1,218 @@
+<h2>Candle cluster with perspective and varied widths</h2>
+<p class="subtitle">Inspired by the photo — wider front candle, narrower back candles, natural grouping with perspective.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #06061e 0%, #150d06 35%, #2a1508 70%, #3d2210 100%);
+        border-radius: 12px;
+        padding: 24px 16px 20px 16px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 460px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- Stars -->
+        <div style="position: absolute; top: 5%; left: 10%; color: #FFFDE7; opacity: 0.5; font-size: 13px;">✦</div>
+        <div style="position: absolute; top: 3%; right: 14%; color: #FFFDE7; opacity: 0.3; font-size: 17px;">✧</div>
+        <div style="position: absolute; top: 12%; left: 60%; color: #FFFDE7; opacity: 0.4; font-size: 10px;">✦</div>
+
+        <div style="font-size: 20px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3); margin-bottom: 3px;">שבת שלום · חג שמח</div>
+        <div style="font-size: 13px; opacity: 0.85;">Pesach</div>
+
+        <!-- Candle cluster with perspective -->
+        <div style="position: relative; width: 180px; height: 200px; margin: 14px 0 0 0;">
+
+          <!-- Shared warm glow -->
+          <div style="position: absolute; top: -15px; left: 45%; transform: translateX(-50%); width: 140px; height: 80px; background: radial-gradient(ellipse, rgba(255,170,40,0.28) 0%, rgba(255,140,20,0.08) 50%, transparent 75%); border-radius: 50%; filter: blur(6px);"></div>
+
+          <!-- Shared base/surface shadow -->
+          <div style="position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 160px; height: 24px; background: radial-gradient(ellipse, rgba(0,0,0,0.25) 0%, transparent 70%); border-radius: 50%;"></div>
+
+          <!-- BACK LEFT: Pesach overall — tallest, narrow, faded -->
+          <div style="position: absolute; left: 32px; bottom: 10px; z-index: 1; filter: brightness(0.65) saturate(0.75);">
+            <svg width="36" height="165" viewBox="0 0 36 165">
+              <!-- Shadow -->
+              <ellipse cx="18" cy="160" rx="13" ry="4" fill="rgba(0,0,0,0.25)"/>
+              <!-- Ribbed texture lines on body -->
+              <clipPath id="bodyClipBack"><rect x="8" y="18" width="16" height="135" rx="5"/></clipPath>
+              <!-- Body -->
+              <rect x="8" y="18" width="16" height="135" rx="5" fill="url(#waxPerspBack)"/>
+              <!-- Ribbing effect -->
+              <g clip-path="url(#bodyClipBack)" opacity="0.12">
+                <line x1="11" y1="18" x2="11" y2="153" stroke="rgba(0,0,0,0.3)" stroke-width="0.7"/>
+                <line x1="14" y1="18" x2="14" y2="153" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+                <line x1="17" y1="18" x2="17" y2="153" stroke="rgba(0,0,0,0.2)" stroke-width="0.7"/>
+                <line x1="20" y1="18" x2="20" y2="153" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              </g>
+              <!-- Left shadow -->
+              <rect x="8" y="18" width="4" height="135" rx="2" fill="rgba(0,0,0,0.12)"/>
+              <!-- Highlight -->
+              <rect x="19" y="22" width="2.5" height="120" rx="1" fill="rgba(255,255,255,0.1)"/>
+              <!-- Top ellipse -->
+              <ellipse cx="16" cy="18" rx="8" ry="3" fill="url(#topBack)"/>
+              <!-- Pool -->
+              <ellipse cx="16" cy="153" rx="12" ry="4" fill="rgba(218,165,32,0.15)"/>
+              <!-- Wick -->
+              <path d="M16,18 C16.3,14 16,10 16,8" stroke="#2E1B0E" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+              <!-- Flame glow -->
+              <ellipse cx="16" cy="4" rx="8" ry="8" fill="rgba(255,160,30,0.12)" filter="blur(2px)"/>
+              <!-- Flame -->
+              <ellipse cx="16" cy="4" rx="3.5" ry="7" fill="#E67E22" opacity="0.45"/>
+              <ellipse cx="16" cy="4" rx="2.5" ry="5.5" fill="#F0A830" opacity="0.6"/>
+              <ellipse cx="16" cy="5.5" rx="1.3" ry="2.8" fill="#FFF3C4" opacity="0.75"/>
+              <defs>
+                <linearGradient id="waxPerspBack" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#B89B5E"/>
+                  <stop offset="35%" stop-color="#E8D5A8"/>
+                  <stop offset="55%" stop-color="#F5EACC"/>
+                  <stop offset="80%" stop-color="#E0CFA0"/>
+                  <stop offset="100%" stop-color="#A88D52"/>
+                </linearGradient>
+                <radialGradient id="topBack" cx="45%" cy="50%">
+                  <stop offset="0%" stop-color="#FFF8E7"/>
+                  <stop offset="100%" stop-color="#C4A86C"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- BACK RIGHT: Yom Tov — medium-tall, medium-narrow -->
+          <div style="position: absolute; left: 88px; bottom: 10px; z-index: 2; filter: brightness(0.78) saturate(0.85);">
+            <svg width="42" height="140" viewBox="0 0 42 140">
+              <ellipse cx="21" cy="135" rx="15" ry="4.5" fill="rgba(0,0,0,0.3)"/>
+              <clipPath id="bodyClipMid"><rect x="7" y="18" width="22" height="110" rx="6"/></clipPath>
+              <rect x="7" y="18" width="22" height="110" rx="6" fill="url(#waxPerspMid)"/>
+              <!-- Ribbing -->
+              <g clip-path="url(#bodyClipMid)" opacity="0.1">
+                <line x1="11" y1="18" x2="11" y2="128" stroke="rgba(0,0,0,0.3)" stroke-width="0.7"/>
+                <line x1="15" y1="18" x2="15" y2="128" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+                <line x1="19" y1="18" x2="19" y2="128" stroke="rgba(0,0,0,0.2)" stroke-width="0.7"/>
+                <line x1="23" y1="18" x2="23" y2="128" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              </g>
+              <rect x="7" y="18" width="5" height="110" rx="2.5" fill="rgba(0,0,0,0.1)"/>
+              <rect x="23" y="22" width="3" height="96" rx="1.5" fill="rgba(255,255,255,0.12)"/>
+              <ellipse cx="18" cy="18" rx="11" ry="3.5" fill="url(#topMid)"/>
+              <!-- Small drip -->
+              <path d="M27,72 Q30,80 28,88" stroke="none" fill="#E8D5A8" opacity="0.4"/>
+              <ellipse cx="28" cy="88" rx="3" ry="3.5" fill="#DCC89A" opacity="0.35"/>
+              <ellipse cx="18" cy="128" rx="14" ry="4.5" fill="rgba(218,165,32,0.2)"/>
+              <path d="M18,18 C18.4,13 18,9 18,7" stroke="#2E1B0E" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+              <ellipse cx="18" cy="3" rx="9" ry="9" fill="rgba(255,160,30,0.15)" filter="blur(2.5px)"/>
+              <ellipse cx="18" cy="4" rx="4.5" ry="8" fill="#E67E22" opacity="0.5"/>
+              <ellipse cx="18" cy="4" rx="3" ry="6" fill="#F0A830" opacity="0.65"/>
+              <ellipse cx="18" cy="5.5" rx="1.5" ry="3" fill="#FFF3C4" opacity="0.8"/>
+              <defs>
+                <linearGradient id="waxPerspMid" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#B89B5E"/>
+                  <stop offset="30%" stop-color="#EDDCB0"/>
+                  <stop offset="55%" stop-color="#FFF8E7"/>
+                  <stop offset="80%" stop-color="#E5D4A5"/>
+                  <stop offset="100%" stop-color="#A88D52"/>
+                </linearGradient>
+                <radialGradient id="topMid" cx="45%" cy="50%">
+                  <stop offset="0%" stop-color="#FFFBF0"/>
+                  <stop offset="100%" stop-color="#C4A86C"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- FRONT CENTER: Shabbat — shortest, widest, brightest -->
+          <div style="position: absolute; left: 56px; bottom: 8px; z-index: 3;">
+            <svg width="60" height="105" viewBox="0 0 60 105">
+              <ellipse cx="30" cy="99" rx="24" ry="6" fill="rgba(0,0,0,0.35)"/>
+              <clipPath id="bodyClipFront"><rect x="9" y="22" width="32" height="70" rx="8"/></clipPath>
+              <rect x="9" y="22" width="32" height="70" rx="8" fill="url(#waxPerspFront)"/>
+              <!-- Ribbing -->
+              <g clip-path="url(#bodyClipFront)" opacity="0.08">
+                <line x1="14" y1="22" x2="14" y2="92" stroke="rgba(0,0,0,0.4)" stroke-width="0.8"/>
+                <line x1="19" y1="22" x2="19" y2="92" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+                <line x1="24" y1="22" x2="24" y2="92" stroke="rgba(0,0,0,0.3)" stroke-width="0.8"/>
+                <line x1="29" y1="22" x2="29" y2="92" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+                <line x1="34" y1="22" x2="34" y2="92" stroke="rgba(0,0,0,0.3)" stroke-width="0.8"/>
+              </g>
+              <!-- Left shadow -->
+              <rect x="9" y="22" width="7" height="70" rx="3.5" fill="rgba(0,0,0,0.08)"/>
+              <!-- Highlight -->
+              <rect x="33" y="26" width="4" height="56" rx="2" fill="rgba(255,255,255,0.18)"/>
+              <rect x="21" y="26" width="6" height="56" rx="3" fill="rgba(255,255,255,0.08)"/>
+              <!-- Top ellipse -->
+              <ellipse cx="25" cy="22" rx="16" ry="5" fill="url(#topFront)"/>
+              <!-- Well in center of top -->
+              <ellipse cx="25" cy="22" rx="6" ry="2" fill="rgba(0,0,0,0.08)"/>
+              <!-- Drips -->
+              <path d="M38,48 Q42,58 39,68" stroke="none" fill="#EDDCB0" opacity="0.5"/>
+              <ellipse cx="39" cy="68" rx="4" ry="5" fill="#E8D5A8" opacity="0.4"/>
+              <path d="M11,55 Q8,64 10,72" stroke="none" fill="#EDDCB0" opacity="0.4"/>
+              <ellipse cx="10" cy="72" rx="3.5" ry="4" fill="#E8D5A8" opacity="0.35"/>
+              <!-- Pool -->
+              <ellipse cx="25" cy="92" rx="22" ry="6" fill="url(#poolFrontP)"/>
+              <!-- Wick -->
+              <path d="M25,22 C25.5,16 25,12 25,9" stroke="#2E1B0E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <circle cx="25" cy="22" r="1.8" fill="#FF6B00" opacity="0.7"/>
+              <!-- Flame glow -->
+              <ellipse cx="25" cy="2" rx="16" ry="14" fill="rgba(255,170,40,0.18)" filter="blur(5px)"/>
+              <!-- Flame -->
+              <ellipse cx="25" cy="3" rx="7" ry="12" fill="#E67E22" opacity="0.55"/>
+              <ellipse cx="25" cy="3" rx="5" ry="9.5" fill="#F5B731" opacity="0.75"/>
+              <ellipse cx="25" cy="5" rx="2.5" ry="5" fill="#FFFBF0"/>
+              <defs>
+                <linearGradient id="waxPerspFront" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#CEAD72"/>
+                  <stop offset="20%" stop-color="#F0DFB5"/>
+                  <stop offset="45%" stop-color="#FFFBF0"/>
+                  <stop offset="70%" stop-color="#F0DFB5"/>
+                  <stop offset="100%" stop-color="#B89B5E"/>
+                </linearGradient>
+                <radialGradient id="topFront" cx="45%" cy="45%">
+                  <stop offset="0%" stop-color="#FFFDF5"/>
+                  <stop offset="60%" stop-color="#F5EACC"/>
+                  <stop offset="100%" stop-color="#C4A86C"/>
+                </radialGradient>
+                <radialGradient id="poolFrontP" cx="50%" cy="40%">
+                  <stop offset="0%" stop-color="#FFFBF0" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#C4A86C" stop-opacity="0.25"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Labels with increasing prominence -->
+        <div style="display: flex; gap: 0; width: 180px; margin-bottom: 12px;">
+          <div style="flex: 1; text-align: center; padding: 6px 2px; border-right: 1px solid rgba(255,255,255,0.08);">
+            <div style="font-size: 9px; opacity: 0.45; letter-spacing: 0.5px; text-transform: uppercase;">Pesach</div>
+            <div style="font-size: 12px; font-weight: 300; margin-top: 2px; opacity: 0.5;">5d 2h</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 6px 2px; border-right: 1px solid rgba(255,255,255,0.08);">
+            <div style="font-size: 9px; opacity: 0.6; letter-spacing: 0.5px; text-transform: uppercase;">Yom Tov</div>
+            <div style="font-size: 13px; font-weight: 300; margin-top: 2px; opacity: 0.7;">1d 8h</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 6px 2px;">
+            <div style="font-size: 9px; opacity: 0.8; letter-spacing: 0.5px; text-transform: uppercase;">Shabbat</div>
+            <div style="font-size: 15px; font-weight: 400; margin-top: 2px;">17h 20m</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 32px; font-size: 13px;">
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Candle Lighting</div><div style="font-weight: 500;">6:03 PM</div></div>
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Havdalah</div><div style="font-weight: 500;">6:59 PM</div></div>
+        </div>
+        <div style="margin-top: 8px; font-size: 11px; opacity: 0.4;">18 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Perspective cluster — varied widths</h3>
+      <p>Front candle (Shabbat) is widest and shortest — closest to viewer. Back-left (Pesach overall) is narrow and tall. Back-right (Yom Tov) is medium. Ribbed texture on all candles. Natural triangular grouping like the photo — not a straight line. Depth via brightness fade and size reduction.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top: 1rem; opacity: 0.5;">For regular Shabbat (no holiday), the card would show just a single wide candle as it does today.</p>

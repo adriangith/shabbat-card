@@ -1,0 +1,144 @@
+<h2>Shabbat during Pesach — what should the card show?</h2>
+<p class="subtitle">It's Friday night of Chol HaMoed Pesach. Candles are lit. Both Shabbat and Pesach are active.</p>
+
+<div class="cards">
+
+  <!-- Option A: Holiday only -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #0a0a2e 0%, #1a0f08 40%, #3d2210 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 340px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- Stars -->
+        <div style="position: absolute; top: 8%; left: 12%; color: #FFFDE7; opacity: 0.6; font-size: 14px;">✦</div>
+        <div style="position: absolute; top: 5%; right: 18%; color: #FFFDE7; opacity: 0.4; font-size: 18px;">✧</div>
+        <div style="position: absolute; top: 15%; left: 55%; color: #FFFDE7; opacity: 0.5; font-size: 12px;">✦</div>
+
+        <!-- Lit candle with warm glow -->
+        <div style="position: relative; margin-bottom: 8px;">
+          <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; background: radial-gradient(circle, rgba(255,200,50,0.3) 0%, transparent 70%); border-radius: 50%;"></div>
+          <svg width="48" height="64" viewBox="0 0 48 80" fill="none">
+            <rect x="18" y="30" width="12" height="40" rx="4" fill="url(#waxA)" stroke="#D4B968" stroke-width="0.5"/>
+            <rect x="20.5" y="33" width="3" height="30" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+            <ellipse cx="24" cy="70" rx="14" ry="4" fill="#E6C35C" opacity="0.5"/>
+            <path d="M24,30 Q24.5,26 24,22" stroke="#3E2723" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <ellipse cx="24" cy="16" rx="6" ry="10" fill="#FF9800" opacity="0.6"/>
+            <ellipse cx="24" cy="16" rx="4" ry="8" fill="#FFD54F" opacity="0.8"/>
+            <ellipse cx="24" cy="18" rx="2" ry="4" fill="#FFFDE7"/>
+            <defs><linearGradient id="waxA" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F5E6C8"/><stop offset="50%" stop-color="#FFF8E7"/><stop offset="100%" stop-color="#ECD9A0"/></linearGradient></defs>
+          </svg>
+        </div>
+
+        <!-- Holiday only greeting -->
+        <div style="font-size: 24px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">חג שמח</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">Pesach</div>
+
+        <!-- Progress ring -->
+        <div style="position: relative; width: 80px; height: 80px; margin: 12px 0;">
+          <svg width="80" height="80" style="transform: rotate(-90deg);">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#DAA520" stroke-width="4" stroke-linecap="round"
+              stroke-dasharray="213.6" stroke-dashoffset="149.5"/>
+          </svg>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <div style="font-size: 16px; font-weight: 300;">30%</div>
+            <div style="font-size: 8px; opacity: 0.5;">Shabbat</div>
+          </div>
+        </div>
+
+        <div style="font-size: 24px; font-weight: 200; letter-spacing: 3px;">17h 20m</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Havdalah</div>
+
+        <div style="display: flex; gap: 32px; margin-top: 14px; font-size: 13px;">
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Candle Lighting</div><div style="font-weight: 500;">6:03 PM</div></div>
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Havdalah</div><div style="font-weight: 500;">6:59 PM</div></div>
+        </div>
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">18 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Holiday identity only</h3>
+      <p>"חג שמח" and "Pesach" — no mention of Shabbat in the greeting. The Pesach earth-tone theme. Lit candle and progress ring still show because issur melacha is active. Clean, but you lose the Shabbat acknowledgement.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Both -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #0a0a2e 0%, #1a0f08 40%, #3d2210 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 340px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- Stars -->
+        <div style="position: absolute; top: 8%; left: 12%; color: #FFFDE7; opacity: 0.6; font-size: 14px;">✦</div>
+        <div style="position: absolute; top: 5%; right: 18%; color: #FFFDE7; opacity: 0.4; font-size: 18px;">✧</div>
+        <div style="position: absolute; top: 15%; left: 55%; color: #FFFDE7; opacity: 0.5; font-size: 12px;">✦</div>
+
+        <!-- Lit candle with warm glow -->
+        <div style="position: relative; margin-bottom: 8px;">
+          <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; background: radial-gradient(circle, rgba(255,200,50,0.3) 0%, transparent 70%); border-radius: 50%;"></div>
+          <svg width="48" height="64" viewBox="0 0 48 80" fill="none">
+            <rect x="18" y="30" width="12" height="40" rx="4" fill="url(#waxB)" stroke="#D4B968" stroke-width="0.5"/>
+            <rect x="20.5" y="33" width="3" height="30" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+            <ellipse cx="24" cy="70" rx="14" ry="4" fill="#E6C35C" opacity="0.5"/>
+            <path d="M24,30 Q24.5,26 24,22" stroke="#3E2723" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <ellipse cx="24" cy="16" rx="6" ry="10" fill="#FF9800" opacity="0.6"/>
+            <ellipse cx="24" cy="16" rx="4" ry="8" fill="#FFD54F" opacity="0.8"/>
+            <ellipse cx="24" cy="18" rx="2" ry="4" fill="#FFFDE7"/>
+            <defs><linearGradient id="waxB" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F5E6C8"/><stop offset="50%" stop-color="#FFF8E7"/><stop offset="100%" stop-color="#ECD9A0"/></linearGradient></defs>
+          </svg>
+        </div>
+
+        <!-- Both greetings -->
+        <div style="font-size: 22px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">שבת שלום · חג שמח</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">Pesach</div>
+
+        <!-- Progress ring -->
+        <div style="position: relative; width: 80px; height: 80px; margin: 12px 0;">
+          <svg width="80" height="80" style="transform: rotate(-90deg);">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#DAA520" stroke-width="4" stroke-linecap="round"
+              stroke-dasharray="213.6" stroke-dashoffset="149.5"/>
+          </svg>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <div style="font-size: 16px; font-weight: 300;">30%</div>
+            <div style="font-size: 8px; opacity: 0.5;">Shabbat</div>
+          </div>
+        </div>
+
+        <div style="font-size: 24px; font-weight: 200; letter-spacing: 3px;">17h 20m</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Havdalah</div>
+
+        <div style="display: flex; gap: 32px; margin-top: 14px; font-size: 13px;">
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Candle Lighting</div><div style="font-weight: 500;">6:03 PM</div></div>
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Havdalah</div><div style="font-weight: 500;">6:59 PM</div></div>
+        </div>
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">18 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Both greetings combined</h3>
+      <p>"שבת שלום · חג שמח" — acknowledges both. Pesach theme stays (earth tones, holiday subtitle). Shabbat is honoured in the greeting and the progress ring. Feels complete — nothing is lost.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top: 1.5rem; opacity: 0.6;">Scenario: Friday night during Chol HaMoed Pesach · Issur melacha active for both Shabbat and Yom Tov</p>

@@ -1,0 +1,147 @@
+<h2>How should upcoming holidays appear?</h2>
+<p class="subtitle">Here's what each approach would look like on the card. Current state: weekday, Pesach in 9 days.</p>
+
+<div class="cards">
+
+  <!-- Option A: Inline Enhancement -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #1a237e 0%, #4a6fa5 40%, #87CEEB 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 280px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+      ">
+        <!-- Unlit candle -->
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom: 8px;">
+          <rect x="20" y="14" width="8" height="24" rx="4" fill="#F5E6C8" stroke="#D4B968" stroke-width="0.5"/>
+          <rect x="22" y="16" width="2" height="18" rx="1" fill="rgba(255,255,255,0.25)"/>
+          <ellipse cx="24" cy="38" rx="10" ry="3" fill="#E6C35C" opacity="0.6"/>
+          <path d="M24,14 Q24.8,10 24,8" stroke="#3E2723" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div style="font-size: 22px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">שבת שלום</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">Tzav</div>
+        <div style="font-size: 28px; font-weight: 200; letter-spacing: 3px; margin-top: 12px;">2d 14h</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Candle Lighting</div>
+
+        <!-- THE ENHANCEMENT: small holiday line -->
+        <div style="
+          margin-top: 16px;
+          padding: 6px 14px;
+          background: rgba(255,215,0,0.15);
+          border: 1px solid rgba(255,215,0,0.3);
+          border-radius: 20px;
+          font-size: 12px;
+          opacity: 0.9;
+        ">
+          🕎 Pesach in 9 days
+        </div>
+
+        <div style="display: flex; gap: 32px; margin-top: 14px; font-size: 13px;">
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Candle Lighting</div><div style="font-weight: 500;">6:03 PM</div></div>
+          <div><div style="font-size: 10px; opacity: 0.45; margin-bottom: 3px;">Havdalah</div><div style="font-weight: 500;">6:59 PM</div></div>
+        </div>
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">6 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Inline Enhancement</h3>
+      <p>Small holiday badge appears below the Shabbat info. Card stays focused on Shabbat — holiday is secondary context. Clean and minimal.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Mode Switching -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #1a237e 0%, #4a6fa5 40%, #87CEEB 100%);
+        border-radius: 12px;
+        padding: 24px 20px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 280px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative;
+      ">
+        <!-- Holiday-themed icon -->
+        <div style="font-size: 40px; margin-bottom: 8px;">🍷</div>
+        <div style="font-size: 22px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">Pesach</div>
+        <div style="font-size: 14px; opacity: 0.85; margin-top: 2px;">15 Nisan 5786</div>
+
+        <!-- Big countdown to holiday -->
+        <div style="font-size: 32px; font-weight: 200; letter-spacing: 3px; margin-top: 14px;">9d 4h</div>
+        <div style="font-size: 11px; opacity: 0.55; margin-top: 4px;">Until Pesach</div>
+
+        <!-- Shabbat demoted to small line -->
+        <div style="
+          margin-top: 18px;
+          padding: 5px 12px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 20px;
+          font-size: 11px;
+          opacity: 0.7;
+        ">
+          Shabbat: Fri 6:03 PM — Sat 6:59 PM
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.4;">6 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Mode Switching</h3>
+      <p>Card flips to holiday mode when close enough. Holiday becomes the primary focus with its own countdown. Shabbat info shrinks to a small summary line.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Dual Display -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="
+        background: linear-gradient(180deg, #1a237e 0%, #4a6fa5 40%, #87CEEB 100%);
+        border-radius: 12px;
+        padding: 20px 16px;
+        color: white;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 280px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+      ">
+        <!-- Top: Shabbat section -->
+        <div style="width: 100%; margin-bottom: 12px;">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none" style="margin-bottom: 4px;">
+            <rect x="20" y="14" width="8" height="24" rx="4" fill="#F5E6C8" stroke="#D4B968" stroke-width="0.5"/>
+            <path d="M24,14 Q24.8,10 24,8" stroke="#3E2723" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div style="font-size: 18px; font-weight: 600;">שבת שלום</div>
+          <div style="font-size: 12px; opacity: 0.8;">Tzav</div>
+          <div style="font-size: 22px; font-weight: 200; letter-spacing: 2px; margin-top: 6px;">2d 14h</div>
+          <div style="font-size: 10px; opacity: 0.55;">Until Candle Lighting</div>
+        </div>
+
+        <!-- Divider -->
+        <div style="width: 60%; height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0;"></div>
+
+        <!-- Bottom: Holiday section -->
+        <div style="width: 100%; margin-top: 8px;">
+          <div style="font-size: 24px; margin-bottom: 4px;">🍷</div>
+          <div style="font-size: 16px; font-weight: 600;">Pesach</div>
+          <div style="font-size: 20px; font-weight: 200; letter-spacing: 2px; margin-top: 4px;">9d 4h</div>
+          <div style="font-size: 10px; opacity: 0.55;">Until Erev Pesach</div>
+        </div>
+
+        <div style="margin-top: 10px; font-size: 10px; opacity: 0.4;">6 Nisan 5786</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Dual Display</h3>
+      <p>Both Shabbat and holiday shown simultaneously in stacked sections. More info at a glance, but the card gets taller and busier.</p>
+    </div>
+  </div>
+
+</div>

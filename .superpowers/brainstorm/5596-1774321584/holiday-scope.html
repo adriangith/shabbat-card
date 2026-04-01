@@ -1,0 +1,35 @@
+<h2>Which holidays should the card track?</h2>
+<p class="subtitle">The Jewish Calendar integration knows about 38 different occasions. Which matter to you?</p>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Major Yom Tov Only</h3>
+      <p>Pesach, Shavuot, Sukkot, Shmini Atzeret/Simchat Torah, Rosh Hashana, Yom Kippur — the days with issur melacha. These are the ones that behave like Shabbat.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>+ Minor / Rabbinic Holidays</h3>
+      <p>Add Chanukah, Purim, Tu B'Shvat, Lag B'Omer, Tu B'Av — festive days without melacha restrictions. These wouldn't change the candle/progress behavior but could show upcoming info.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>+ Fast Days</h3>
+      <p>Add Tzom Gedaliah, Asara B'Tevet, Ta'anit Esther, Tish'a B'Av, Tzom Tammuz — these have a very different character (somber, no festive greeting).</p>
+    </div>
+  </div>
+  <div class="option" data-choice="d" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>+ Chol HaMoed & Erev</h3>
+      <p>Add the intermediate days of Pesach/Sukkot and preparation days (Erev Pesach, Erev Rosh Hashana, etc.) — contextual but not holy days themselves.</p>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top: 2rem; opacity: 0.7;">You can select multiple — click all that apply</p>
