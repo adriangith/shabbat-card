@@ -39,10 +39,11 @@ class ShabbatCard extends LitElement {
   }
 
   shouldUpdate() {
+    // Re-parse here (not shared with computeState) because shouldUpdate runs before render
     const candleLightingIso = this._hass?.states?.[ENTITIES.candleLighting]?.state;
     const candleLightingTs = candleLightingIso ? new Date(candleLightingIso).getTime() : NaN;
     const now = Date.now();
-    const inPreShabbatWindow = !isNaN(candleLightingTs) && now >= candleLightingTs && now < candleLightingTs + 20 * 60 * 1000;
+    const inPreShabbatWindow = !isNaN(candleLightingTs) && now >= candleLightingTs && now < candleLightingTs + 20 * 60 * 1000; // 20 min (vs 18) buffers the final tick before issur flips
     const timeBucket = inPreShabbatWindow ? Math.floor(now / 60000) : '';
     const newKey = (this._config?.size || '') + '|' + (this._config?.preview || '') + '|' + buildDataKey(this._hass) + '|' + timeBucket;
     if (newKey === this._lastDataKey) return false;
