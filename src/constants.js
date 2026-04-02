@@ -141,6 +141,21 @@ export const DEFAULT_CONFIG = {
 };
 
 export const PREVIEW_DATA = {
+  pre_shabbat: {
+    issur: false,
+    motzei: false,
+    preShabbat: true,
+    holiday: '',
+    progress: 0,
+    statusText: '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD',
+    statusSubtitle: 'Vayakhel-Pekudei',
+    countdown: '14m',
+    countdownLabel: 'Until Shabbat',
+    targetTimeLocal: 'Friday 7:42 PM',
+    candleLighting: '7:24 PM',
+    havdalah: '8:20 PM',
+    hebrewDate: '19 Adar 5786',
+  },
   shabbat_early: {
     issur: true,
     motzei: false,
