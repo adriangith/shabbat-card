@@ -39,7 +39,12 @@ class ShabbatCard extends LitElement {
   }
 
   shouldUpdate() {
-    const newKey = (this._config?.size || '') + '|' + (this._config?.preview || '') + '|' + buildDataKey(this._hass);
+    const candleLightingIso = this._hass?.states?.[ENTITIES.candleLighting]?.state;
+    const candleLightingTs = candleLightingIso ? new Date(candleLightingIso).getTime() : NaN;
+    const now = Date.now();
+    const inPreShabbatWindow = !isNaN(candleLightingTs) && now >= candleLightingTs && now < candleLightingTs + 20 * 60 * 1000;
+    const timeBucket = inPreShabbatWindow ? Math.floor(now / 60000) : '';
+    const newKey = (this._config?.size || '') + '|' + (this._config?.preview || '') + '|' + buildDataKey(this._hass) + '|' + timeBucket;
     if (newKey === this._lastDataKey) return false;
     this._lastDataKey = newKey;
     return true;
