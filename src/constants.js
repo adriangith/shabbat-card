@@ -159,6 +159,7 @@ export const PREVIEW_DATA = {
   shabbat_early: {
     issur: true,
     motzei: false,
+    preShabbat: false,
     holiday: '',
     progress: 5,
     statusText: '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD',
@@ -173,6 +174,7 @@ export const PREVIEW_DATA = {
   shabbat_mid: {
     issur: true,
     motzei: false,
+    preShabbat: false,
     holiday: '',
     progress: 52,
     statusText: '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD',
@@ -187,6 +189,7 @@ export const PREVIEW_DATA = {
   shabbat_late: {
     issur: true,
     motzei: false,
+    preShabbat: false,
     holiday: '',
     progress: 92,
     statusText: '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD',
@@ -201,6 +204,7 @@ export const PREVIEW_DATA = {
   motzei: {
     issur: false,
     motzei: true,
+    preShabbat: false,
     holiday: '',
     progress: 0,
     statusText: '\u05E9\u05D1\u05D5\u05E2 \u05D8\u05D5\u05D1',
@@ -215,6 +219,7 @@ export const PREVIEW_DATA = {
   yom_tov: {
     issur: true,
     motzei: false,
+    preShabbat: false,
     holiday: 'Pesach',
     progress: 35,
     statusText: '\u05D7\u05D2 \u05E9\u05DE\u05D7',
