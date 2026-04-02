@@ -56,8 +56,9 @@ export function computeState(hass, config, cache) {
   const havdalahTs = new Date(havdalahIso).getTime();
   const now = Date.now();
 
-  const preShabbat = !issur && !motzei && !isNaN(candleLightingTs) && now >= candleLightingTs;
-  const shabbatStartTs = preShabbat ? candleLightingTs + 18 * 60 * 1000 : null;
+  const preShabbatRaw = !issur && !motzei && !isNaN(candleLightingTs) && now >= candleLightingTs;
+  const shabbatStartTs = preShabbatRaw ? candleLightingTs + 18 * 60 * 1000 : null;
+  const preShabbat = preShabbatRaw && shabbatStartTs !== null && (shabbatStartTs - now) > 0;
 
   let statusText, statusSubtitle;
   if (issur && hasHoliday) {
