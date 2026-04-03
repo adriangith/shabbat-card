@@ -100,7 +100,7 @@ class ShabbatCard extends LitElement {
 
     const textColor = ((state.issur || state.preShabbat) && isNightSky) || state.motzei ? '#F5F0E8' : '#FFFFFF';
     const showStars = sz.showStars && (((state.issur || state.preShabbat) && isNightSky) || state.motzei);
-    const manyStars = state.motzei || (state.issur && sunElev !== undefined && parseFloat(sunElev) < -12);
+    const manyStars = state.motzei || ((state.issur || state.preShabbat) && sunElev !== undefined && parseFloat(sunElev) < -12);
 
     const holidayBit = state.holiday ? ` \u00B7 ${state.holiday}` : '';
 
@@ -130,7 +130,7 @@ class ShabbatCard extends LitElement {
     `;
 
     const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat);
-    const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing;
+    const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing; // preShabbat intentionally excluded: progress=0 ring would show "0% complete"
 
     const times = sz.showTimes ? html`
       <div class="sc-times">
@@ -146,7 +146,7 @@ class ShabbatCard extends LitElement {
 
     const date = sz.showDate ? html`<div class="sc-date">${state.hebrewDate}${holidayBit}</div>` : nothing;
 
-    const useTwoCol = sz.twoCol && (state.issur || state.motzei);
+    const useTwoCol = sz.twoCol && (state.issur || state.preShabbat || state.motzei);
 
     return html`
       <ha-card style="overflow:hidden; border-radius:16px;">
