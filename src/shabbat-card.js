@@ -96,10 +96,10 @@ class ShabbatCard extends LitElement {
     const preview = this._config.preview || 'off';
     const sunState = this._hass.states?.[ENTITIES.sun];
     const sunElev = sunState?.attributes?.elevation;
-    const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview);
+    const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview, state.preShabbat);
 
-    const textColor = (state.issur && isNightSky) || state.motzei ? '#F5F0E8' : '#FFFFFF';
-    const showStars = sz.showStars && ((state.issur && isNightSky) || state.motzei);
+    const textColor = ((state.issur || state.preShabbat) && isNightSky) || state.motzei ? '#F5F0E8' : '#FFFFFF';
+    const showStars = sz.showStars && (((state.issur || state.preShabbat) && isNightSky) || state.motzei);
     const manyStars = state.motzei || (state.issur && sunElev !== undefined && parseFloat(sunElev) < -12);
 
     const holidayBit = state.holiday ? ` \u00B7 ${state.holiday}` : '';
@@ -129,7 +129,7 @@ class ShabbatCard extends LitElement {
       --sc-two-col-gap: ${sz.twoColGap || '14px'};
     `;
 
-    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon);
+    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat);
     const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing;
 
     const times = sz.showTimes ? html`

@@ -43,4 +43,13 @@ This is a single-file Home Assistant Lovelace custom card built with [Lit](https
 
 ## Preview Modes
 
-Set `preview: shabbat_early|shabbat_mid|shabbat_late|motzei|yom_tov` in the card config to render with static fixture data from `PREVIEW_DATA` (constants.js) instead of live HA sensors. Useful during development without a real Jewish Calendar integration.
+Set `preview: pre_shabbat|shabbat_early|shabbat_mid|shabbat_late|motzei|yom_tov` in the card config to render with static fixture data from `PREVIEW_DATA` (constants.js) instead of live HA sensors. Useful during development without a real Jewish Calendar integration.
+
+| Preview mode | Description |
+|---|---|
+| `pre_shabbat` | ~18 minutes between candle lighting and Shabbat start |
+| `shabbat_early` | Early Shabbat (first hours after start) |
+| `shabbat_mid` | Mid-Shabbat |
+| `shabbat_late` | Late Shabbat (approaching Havdalah) |
+| `motzei` | After Shabbat ends (Motzei Shabbat) |
+| `yom_tov` | Yom Tov / Jewish holiday |
