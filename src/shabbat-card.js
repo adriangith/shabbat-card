@@ -39,7 +39,13 @@ class ShabbatCard extends LitElement {
   }
 
   shouldUpdate() {
-    const newKey = (this._config?.size || '') + '|' + (this._config?.preview || '') + '|' + buildDataKey(this._hass);
+    // Re-parse here (not shared with computeState) because shouldUpdate runs before render
+    const candleLightingIso = this._hass?.states?.[ENTITIES.candleLighting]?.state;
+    const candleLightingTs = candleLightingIso ? new Date(candleLightingIso).getTime() : NaN;
+    const now = Date.now();
+    const inPreShabbatWindow = !isNaN(candleLightingTs) && now >= candleLightingTs && now < candleLightingTs + 20 * 60 * 1000; // 20 min (vs 18) buffers the final tick before issur flips
+    const timeBucket = inPreShabbatWindow ? Math.floor(now / 60000) : '';
+    const newKey = (this._config?.size || '') + '|' + (this._config?.preview || '') + '|' + buildDataKey(this._hass) + '|' + timeBucket;
     if (newKey === this._lastDataKey) return false;
     this._lastDataKey = newKey;
     return true;
@@ -90,11 +96,11 @@ class ShabbatCard extends LitElement {
     const preview = this._config.preview || 'off';
     const sunState = this._hass.states?.[ENTITIES.sun];
     const sunElev = sunState?.attributes?.elevation;
-    const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview);
+    const { background, isNightSky } = computeSky(sunElev, state.issur, state.motzei, state.progress, preview, state.preShabbat);
 
-    const textColor = (state.issur && isNightSky) || state.motzei ? '#F5F0E8' : '#FFFFFF';
-    const showStars = sz.showStars && ((state.issur && isNightSky) || state.motzei);
-    const manyStars = state.motzei || (state.issur && sunElev !== undefined && parseFloat(sunElev) < -12);
+    const textColor = ((state.issur || state.preShabbat) && isNightSky) || state.motzei ? '#F5F0E8' : '#FFFFFF';
+    const showStars = sz.showStars && (((state.issur || state.preShabbat) && isNightSky) || state.motzei);
+    const manyStars = state.motzei || ((state.issur || state.preShabbat) && sunElev !== undefined && parseFloat(sunElev) < -12);
 
     const holidayBit = state.holiday ? ` \u00B7 ${state.holiday}` : '';
 
@@ -123,8 +129,8 @@ class ShabbatCard extends LitElement {
       --sc-two-col-gap: ${sz.twoColGap || '14px'};
     `;
 
-    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon);
-    const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing;
+    const icon = renderIcon(this._config.size, state.issur, state.motzei, state.progress, sz.showIcon, state.preShabbat);
+    const ring = state.issur && sz.showRing ? this._renderRing(sz, state.progress) : nothing; // preShabbat intentionally excluded: progress=0 ring would show "0% complete"
 
     const times = sz.showTimes ? html`
       <div class="sc-times">
@@ -140,7 +146,7 @@ class ShabbatCard extends LitElement {
 
     const date = sz.showDate ? html`<div class="sc-date">${state.hebrewDate}${holidayBit}</div>` : nothing;
 
-    const useTwoCol = sz.twoCol && (state.issur || state.motzei);
+    const useTwoCol = sz.twoCol && (state.issur || state.preShabbat || state.motzei);
 
     return html`
       <ha-card style="overflow:hidden; border-radius:16px;">

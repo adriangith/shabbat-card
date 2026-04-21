@@ -143,9 +143,9 @@ function sparklesSvg(heroSize) {
   </svg>`;
 }
 
-export function renderIcon(sizeName, issur, motzei, progress, showIcon) {
+export function renderIcon(sizeName, issur, motzei, progress, showIcon, preShabbat = false) {
   if (showIcon === false) return nothing;
-  if (issur) {
+  if (issur || preShabbat) {
     return html`<div class="sc-melt-candle">${renderCandle(sizeName, progress)}</div>`;
   } else if (motzei) {
     return html`<div class="sc-hero sc-float">${sparklesSvg(48)}</div>`;

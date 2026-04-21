@@ -49,6 +49,7 @@ class ShabbatCardEditor extends LitElement {
         <label class="spacer">Preview Mode</label>
         <select @change=${this._previewChanged}>
           <option value="off" ?selected=${currentPreview === 'off'}>Off \u2014 live data</option>
+          <option value="pre_shabbat" ?selected=${currentPreview === 'pre_shabbat'}>\uD83D\uDD6F\uFE0F Pre-Shabbat \u2014 candles lit (18 min window)</option>
           <option value="shabbat_early" ?selected=${currentPreview === 'shabbat_early'}>\uD83D\uDD6F\uFE0F Shabbat \u2014 early (sunset)</option>
           <option value="shabbat_mid" ?selected=${currentPreview === 'shabbat_mid'}>\uD83D\uDD6F\uFE0F Shabbat \u2014 middle (night)</option>
           <option value="shabbat_late" ?selected=${currentPreview === 'shabbat_late'}>\uD83D\uDD6F\uFE0F Shabbat \u2014 late (dawn)</option>

@@ -56,6 +56,10 @@ export function computeState(hass, config, cache) {
   const havdalahTs = new Date(havdalahIso).getTime();
   const now = Date.now();
 
+  const preShabbatRaw = !issur && !motzei && !isNaN(candleLightingTs) && now >= candleLightingTs;
+  const shabbatStartTs = preShabbatRaw ? candleLightingTs + 18 * 60 * 1000 : null;
+  const preShabbat = preShabbatRaw && shabbatStartTs !== null && (shabbatStartTs - now) > 0;
+
   let statusText, statusSubtitle;
   if (issur && hasHoliday) {
     statusText = '\u05D7\u05D2 \u05E9\u05DE\u05D7';
@@ -95,7 +99,12 @@ export function computeState(hass, config, cache) {
   }
 
   let countdown, countdownLabel, targetTimeLocal;
-  if (issur && cache.havdalahTs) {
+  if (preShabbat && shabbatStartTs) {
+    const remaining = shabbatStartTs - now;
+    countdown = remaining > 0 ? formatCountdown(remaining) : '';
+    countdownLabel = 'Until Shabbat';
+    targetTimeLocal = formatTargetTime(new Date(shabbatStartTs).toISOString());
+  } else if (issur && cache.havdalahTs) {
     const remaining = cache.havdalahTs - now;
     countdown = remaining > 0 ? formatCountdown(remaining) : '0m';
     countdownLabel = 'Until Havdalah';
@@ -111,7 +120,7 @@ export function computeState(hass, config, cache) {
   const havdalah = formatTime(havdalahIso);
 
   return {
-    issur, motzei, holiday: hasHoliday ? holiday : '',
+    issur, motzei, preShabbat, holiday: hasHoliday ? holiday : '',
     progress, statusText, statusSubtitle,
     countdown, countdownLabel, targetTimeLocal,
     candleLighting, havdalah, hebrewDate,

@@ -1,10 +1,10 @@
 import { html, nothing } from 'lit';
 
-export function computeSky(sunElevation, issur, motzei, progress, preview) {
+export function computeSky(sunElevation, issur, motzei, progress, preview, preShabbat = false) {
   let bg;
   let isNightSky = false;
 
-  if (issur && preview === 'off' && sunElevation !== undefined) {
+  if ((issur || preShabbat) && preview === 'off' && sunElevation !== undefined) {
     const elev = parseFloat(sunElevation);
     if (elev < -18) {
       bg = 'linear-gradient(180deg, #0a0a2e 0%, #0d1137 35%, #1a1a4e 70%, #1e2761 100%)';
@@ -34,7 +34,7 @@ export function computeSky(sunElevation, issur, motzei, progress, preview) {
       bg = 'linear-gradient(180deg, #1e3c72 0%, #2a5298 40%, #4a8bc2 70%, #87CEEB 100%)';
       isNightSky = false;
     }
-  } else if (issur) {
+  } else if (issur || preShabbat) {
     if (progress < 10) { bg = 'linear-gradient(180deg, #1a0533 0%, #4a1942 30%, #c85a17 60%, #f5c563 100%)'; isNightSky = true; }
     else if (progress > 85) { bg = 'linear-gradient(180deg, #0a0a2e 0%, #1a1a4e 40%, #2d1b69 70%, #e8a040 100%)'; isNightSky = true; }
     else { bg = 'linear-gradient(180deg, #0a0a2e 0%, #0d1137 35%, #1a1a4e 70%, #1e2761 100%)'; isNightSky = true; }
